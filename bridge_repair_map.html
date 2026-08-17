@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Quantities Map — CSJ 0907-00-235 Bridge Joint &amp; Beam Repair</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+body { margin:0; background:#1a1f2e; color:#e8eaf0; font-family:'Segoe UI',Arial,sans-serif; }
+a { color: inherit; }
+header.page-hd { background:#12172a; border-bottom:1px solid #2e3a5c; padding:16px 24px; }
+header.page-hd .kicker { font-size:11px; color:#8892b0; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+header.page-hd h1 { margin:0; font-size:20px; color:#fff; }
+header.page-hd .sub { font-size:12px; color:#8892b0; margin-top:4px; }
+.stats-bar { display:flex; gap:0; background:#0f1424; border-bottom:1px solid #2e3a5c; flex-wrap:wrap; }
+.stat { padding:14px 22px; text-align:center; border-right:1px solid #2e3a5c; flex:1; min-width:100px; }
+.stat .n { font-size:21px; font-weight:800; color:#7eb8f7; }
+.stat .l { font-size:9.5px; color:#8892b0; margin-top:2px; text-transform:uppercase; letter-spacing:0.06em; }
+.leaflet-popup-content-wrapper { background:#12172a !important; border:1px solid #3b5bdb !important; border-radius:10px !important; box-shadow:0 4px 20px rgba(0,0,0,0.6) !important; color:#e8eaf0 !important; padding:0 !important; }
+.leaflet-popup-tip { background:#12172a !important; }
+.leaflet-popup-content { margin:0 !important; width:auto !important; }
+.leaflet-control-zoom a { background:#1e2740 !important; color:#c8d0e0 !important; border-color:#2e3a5c !important; }
+.leaflet-control-zoom a:hover { background:#263660 !important; }
+.leaflet-control-attribution { background:rgba(18,23,42,0.8) !important; color:#555 !important; }
+.leaflet-control-layers { background:#1e2740 !important; color:#e8eaf0 !important; border:1px solid #2e3a5c !important; }
+.filter-bar { display:flex; gap:6px; flex-wrap:wrap; padding:10px 24px; background:#151a2a; border-bottom:1px solid #2e3a5c; align-items:center; }
+.filter-btn { padding:4px 11px; border-radius:5px; border:1px solid #2e3a5c; background:#1e2740; color:#c8d0e0; font-size:11.5px; cursor:pointer; }
+.filter-btn.active { background:#2563eb; border-color:#3b82f6; color:#fff; }
+.filter-btn:hover { background:#263660; }
+select.county-select { padding:4px 10px; border-radius:5px; border:1px solid #2e3a5c; background:#1e2740; color:#c8d0e0; font-size:11.5px; }
+footer.page-ft { padding:14px 24px; background:#0f1424; border-top:1px solid #2e3a5c; font-size:11px; color:#5c6784; text-align:center; }
+.backlink { font-size:12px; color:#7eb8f7; text-decoration:none; }
+
+#map { width:100%; height: calc(100vh - 218px); min-height:420px; }
+</style>
+</head>
+<body>
+<header class="page-hd">
+  <div class="kicker">TxDOT San Angelo District &middot; CSJ 0907-00-235 &middot; VA &middot; "Tom Green, etc."</div>
+  <h1>Quantities Map — Bridge Joint Cleaning &amp; Sealing / Beam Repair</h1>
+  <div class="sub"><a class="backlink" href="index.html">&larr; Back to project index</a> &middot; 33 locations across 8 counties &middot; Federal Aid Project F 2026(664)</div>
+</header>
+<div class="stats-bar">
+  <div class="stat"><div class="n">33</div><div class="l">Locations</div></div>
+  <div class="stat"><div class="n">6,725</div><div class="l">Total LF Joint</div></div>
+  <div class="stat"><div class="n">2,850</div><div class="l">CL3 LF (438-7004)</div></div>
+  <div class="stat"><div class="n">3,875</div><div class="l">CL7 LF (438-7007)</div></div>
+  <div class="stat"><div class="n">4</div><div class="l">Concrete Beam Repairs (3 + 1 CFRP)</div></div>
+  <div class="stat"><div class="n">8</div><div class="l">Counties</div></div>
+</div>
+<div class="filter-bar">
+  <span style="font-size:11px;color:#8892b0;margin-right:4px;">County:</span>
+  <select class="county-select" id="countySel"><option value="all">All Counties</option></select>
+  <span style="font-size:11px;color:#8892b0;margin:0 4px 0 14px;">Tier:</span>
+  <button class="filter-btn active" data-tier="all">All</button>
+  <button class="filter-btn" data-tier="orange">&le; 50 LF</button>
+  <button class="filter-btn" data-tier="yellow">51&ndash;150 LF</button>
+  <button class="filter-btn" data-tier="blue">151&ndash;400 LF</button>
+  <button class="filter-btn" data-tier="purple">400+ LF</button>
+</div>
+<div id="map"></div>
+<footer class="page-ft">Production rate assumption: 300 LF/day combined CL3+CL7 (2-person hot-pour rubber sealant crew), 1-day mobilization minimum per site. Concrete Beam Repair location (#24) shown with a ⚙ ring.</footer>
+<script>
+var DATA = [{"loc": 1, "nbi": "07-119-0-0077-04-041", "feat": "Rock Pen Draw", "road": "US 67", "county": "Irion", "lat": 31.22734698, "lng": -100.82860961, "cl3": 368, "cl7": 0, "qty": 368, "tier": "blue", "days": 2, "trip": "B", "beam": false}, {"loc": 2, "nbi": "07-119-0-0077-05-006", "feat": "Coon Hollow", "road": "US 67", "county": "Irion", "lat": 31.27657238, "lng": -100.81436972, "cl3": 322, "cl7": 0, "qty": 322, "tier": "blue", "days": 2, "trip": "B", "beam": false}, {"loc": 3, "nbi": "07-119-0-0077-05-009", "feat": "Lopez Creek", "road": "US 67", "county": "Irion", "lat": 31.30481531, "lng": -100.79529708, "cl3": 230, "cl7": 0, "qty": 230, "tier": "blue", "days": 1, "trip": "B", "beam": false}, {"loc": 4, "nbi": "07-119-0-2468-01-001", "feat": "Lopez Creek", "road": "RM 2469", "county": "Irion", "lat": 31.29525995, "lng": -100.88090153, "cl3": 25, "cl7": 0, "qty": 25, "tier": "orange", "days": 1, "trip": "B", "beam": false}, {"loc": 5, "nbi": "07-134-0-0112-01-020", "feat": "Little Devils River", "road": "US 290", "county": "Kimble", "lat": 30.29652723, "lng": -99.4080233, "cl3": 255, "cl7": 0, "qty": 255, "tier": "blue", "days": 1, "trip": "F", "beam": false}, {"loc": 6, "nbi": "07-134-0-0112-01-022", "feat": "Pedernales River", "road": "US 290", "county": "Kimble", "lat": 30.30038476, "lng": -99.30833543, "cl3": 210, "cl7": 0, "qty": 210, "tier": "blue", "days": 1, "trip": "F", "beam": false}, {"loc": 7, "nbi": "07-134-0-0141-09-134", "feat": "IH-10 crossing", "road": "FM 2291", "county": "Kimble", "lat": 30.52691558, "lng": -99.84241299, "cl3": 0, "cl7": 145, "qty": 145, "tier": "yellow", "days": 1, "trip": "F", "beam": false}, {"loc": 8, "nbi": "07-164-0-0825-01-005", "feat": "Volkmann Draw", "road": "US 190", "county": "Menard", "lat": 30.94283344, "lng": -99.77083004, "cl3": 30, "cl7": 0, "qty": 30, "tier": "orange", "days": 1, "trip": "E", "beam": false}, {"loc": 9, "nbi": "07-164-0-0825-01-007", "feat": "Chapman Draw", "road": "US 190", "county": "Menard", "lat": 30.95482062, "lng": -99.73653565, "cl3": 30, "cl7": 0, "qty": 30, "tier": "orange", "days": 1, "trip": "E", "beam": false}, {"loc": 10, "nbi": "07-164-0-0825-01-009", "feat": "Scalp Creek", "road": "US 190", "county": "Menard", "lat": 30.95482062, "lng": -99.73653565, "cl3": 77, "cl7": 0, "qty": 77, "tier": "yellow", "days": 1, "trip": "E", "beam": false}, {"loc": 11, "nbi": "07-164-0-2008-01-002", "feat": "Las Moras Creek", "road": "FM 2092", "county": "Menard", "lat": 30.91682946, "lng": -99.80672871, "cl3": 39, "cl7": 0, "qty": 39, "tier": "orange", "days": 1, "trip": "E", "beam": false}, {"loc": 12, "nbi": "07-193-0-0235-03-017", "feat": "Camp Wood Creek", "road": "SH 55", "county": "Real", "lat": 29.68336768, "lng": -100.01824468, "cl3": 378, "cl7": 0, "qty": 378, "tier": "blue", "days": 2, "trip": "H", "beam": false}, {"loc": 13, "nbi": "07-193-0-0235-03-023", "feat": "Ranch Creek", "road": "SH 55", "county": "Real", "lat": 29.63546713, "lng": -100.00651061, "cl3": 84, "cl7": 0, "qty": 84, "tier": "yellow", "days": 1, "trip": "H", "beam": false}, {"loc": 14, "nbi": "07-200-0-1646-01-001", "feat": "Big Coyote Creek Branch", "road": "FM 1677", "county": "Runnels", "lat": 32.02088789, "lng": -100.03878098, "cl3": 138, "cl7": 0, "qty": 138, "tier": "yellow", "days": 1, "trip": "D", "beam": false}, {"loc": 15, "nbi": "07-200-0-1731-01-001", "feat": "Bluff Creek", "road": "FM 1770", "county": "Runnels", "lat": 31.96636586, "lng": -99.93991068, "cl3": 51, "cl7": 0, "qty": 51, "tier": "yellow", "days": 1, "trip": "D", "beam": false}, {"loc": 16, "nbi": "07-200-0-1731-01-003", "feat": "Elm Creek", "road": "FM 1770", "county": "Runnels", "lat": 31.97959143, "lng": -99.86688577, "cl3": 51, "cl7": 0, "qty": 51, "tier": "yellow", "days": 1, "trip": "D", "beam": false}, {"loc": 17, "nbi": "07-216-0-1648-01-003", "feat": "Sterling Creek", "road": "SH 163", "county": "Sterling", "lat": 31.7470307, "lng": -101.03881427, "cl3": 56, "cl7": 0, "qty": 56, "tier": "yellow", "days": 1, "trip": "C", "beam": false}, {"loc": 18, "nbi": "07-218-0-0141-02-068", "feat": "Devils River (WB)", "road": "IH-10", "county": "Sutton", "lat": 30.63186297, "lng": -100.86539401, "cl3": 0, "cl7": 798, "qty": 798, "tier": "purple", "days": 3, "trip": "G", "beam": false}, {"loc": 19, "nbi": "07-218-0-0141-02-069", "feat": "Devils River (EB)", "road": "IH-10", "county": "Sutton", "lat": 30.63164658, "lng": -100.8655769, "cl3": 0, "cl7": 798, "qty": 798, "tier": "purple", "days": 3, "trip": "G", "beam": false}, {"loc": 20, "nbi": "07-218-0-0141-02-070", "feat": "RM 1312 (WB)", "road": "IH-10", "county": "Sutton", "lat": 30.62668983, "lng": -100.85174619, "cl3": 0, "cl7": 170, "qty": 170, "tier": "blue", "days": 1, "trip": "G", "beam": false}, {"loc": 21, "nbi": "07-218-0-0141-02-071", "feat": "RM 1312 (EB)", "road": "IH-10", "county": "Sutton", "lat": 30.62644856, "lng": -100.85187147, "cl3": 0, "cl7": 170, "qty": 170, "tier": "blue", "days": 1, "trip": "G", "beam": false}, {"loc": 22, "nbi": "07-218-0-0141-02-072", "feat": "Turkey Roost Draw (EB)", "road": "IH-10", "county": "Sutton", "lat": 30.62421938, "lng": -100.84599799, "cl3": 0, "cl7": 224, "qty": 224, "tier": "blue", "days": 1, "trip": "G", "beam": false}, {"loc": 23, "nbi": "07-218-0-0141-02-073", "feat": "Turkey Roost Draw (WB)", "road": "IH-10", "county": "Sutton", "lat": 30.62438184, "lng": -100.8456838, "cl3": 0, "cl7": 240, "qty": 240, "tier": "blue", "days": 1, "trip": "G", "beam": false}, {"loc": 24, "nbi": "07-218-0-0141-03-086", "feat": "SL 467 at IH-10 (+ Concrete Beam Repair 3EA / CFRP 1EA)", "road": "SL 467", "county": "Sutton", "lat": 30.58276624, "lng": -100.6579261, "cl3": 0, "cl7": 235, "qty": 235, "tier": "blue", "days": 1, "trip": "G", "beam": true}, {"loc": 25, "nbi": "07-226-0-0077-06-071", "feat": "North Concho River (SB Ftg Rd)", "road": "US 67 SB Ftg Rd", "county": "Tom Green", "lat": 31.46680827, "lng": -100.44891992, "cl3": 0, "cl7": 204, "qty": 204, "tier": "blue", "days": 1, "trip": "A", "beam": false}, {"loc": 26, "nbi": "07-226-0-0077-06-072", "feat": "North Concho River (NB Ftg Rd)", "road": "US 67 NB Ftg Rd", "county": "Tom Green", "lat": 31.46619593, "lng": -100.44786909, "cl3": 400, "cl7": 0, "qty": 400, "tier": "blue", "days": 2, "trip": "A", "beam": false}, {"loc": 27, "nbi": "07-226-0-0077-06-087", "feat": "Glenna St", "road": "US 67", "county": "Tom Green", "lat": 31.45127788, "lng": -100.4881272, "cl3": 0, "cl7": 170, "qty": 170, "tier": "blue", "days": 1, "trip": "A", "beam": false}, {"loc": 28, "nbi": "07-226-0-0077-06-090", "feat": "Van Buren St", "road": "US 67", "county": "Tom Green", "lat": 31.45975825, "lng": -100.4626152, "cl3": 0, "cl7": 108, "qty": 108, "tier": "yellow", "days": 1, "trip": "A", "beam": false}, {"loc": 29, "nbi": "07-226-0-0077-06-091", "feat": "N Jefferson St", "road": "US 67", "county": "Tom Green", "lat": 31.4613828, "lng": -100.4585776, "cl3": 0, "cl7": 179, "qty": 179, "tier": "blue", "days": 1, "trip": "A", "beam": false}, {"loc": 30, "nbi": "07-226-0-0077-06-092", "feat": "Howard St", "road": "US 67", "county": "Tom Green", "lat": 31.45763263, "lng": -100.4670273, "cl3": 0, "cl7": 108, "qty": 108, "tier": "yellow", "days": 1, "trip": "A", "beam": false}, {"loc": 31, "nbi": "07-226-0-0158-02-060", "feat": "N Main St", "road": "US 67", "county": "Tom Green", "lat": 31.47400801, "lng": -100.432025, "cl3": 0, "cl7": 166, "qty": 166, "tier": "blue", "days": 1, "trip": "A", "beam": false}, {"loc": 32, "nbi": "07-226-0-0158-02-063", "feat": "N Bell St", "road": "US 67", "county": "Tom Green", "lat": 31.47542249, "lng": -100.4132184, "cl3": 0, "cl7": 160, "qty": 160, "tier": "blue", "days": 1, "trip": "A", "beam": false}, {"loc": 33, "nbi": "07-226-0-2010-04-011", "feat": "Concho River", "road": "RM 2034", "county": "Tom Green", "lat": 31.66117052, "lng": -100.74137128, "cl3": 106, "cl7": 0, "qty": 106, "tier": "yellow", "days": 1, "trip": "A", "beam": false}];
+var TIER_COLOR = {"orange": "#f97316", "yellow": "#eab308", "blue": "#3b82f6", "purple": "#a855f7"};
+var TIER_STROKE = {"orange": "#c2410c", "yellow": "#a16207", "blue": "#1d4ed8", "purple": "#7e22ce"};
+var TIER_RADIUS = {"orange": 9, "yellow": 11, "blue": 13, "purple": 17};
+
+(function init() {
+  if (typeof L === 'undefined') { setTimeout(init, 100); return; }
+  var map = L.map('map').setView([30.9, -100.2], 7);
+  
+var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors', maxZoom: 19
+});
+var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '&copy; Esri, Maxar, Earthstar Geographics', maxZoom: 19
+});
+var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenTopoMap', maxZoom: 17
+});
+streets.addTo(map);
+L.control.layers({'Street Map': streets, 'Satellite': satellite, 'Topographic': topo}, {}, {position:'topright'}).addTo(map);
+L.control.scale({imperial: true, metric: false}).addTo(map);
+
+
+  var markerLayer = L.layerGroup().addTo(map);
+  var counties = Array.from(new Set(DATA.map(function(d){return d.county;}))).sort();
+  var sel = document.getElementById('countySel');
+  counties.forEach(function(c){ var o=document.createElement('option'); o.value=c; o.textContent=c+' County'; sel.appendChild(o); });
+
+  var curTier = 'all', curCounty = 'all';
+
+  function render() {
+    markerLayer.clearLayers();
+    DATA.filter(function(d){
+      return (curTier==='all'||d.tier===curTier) && (curCounty==='all'||d.county===curCounty);
+    }).forEach(function(d){
+      var r = TIER_RADIUS[d.tier];
+      var m = L.circleMarker([d.lat, d.lng], {
+        radius: r, fillColor: TIER_COLOR[d.tier], color: d.beam ? '#fff' : TIER_STROKE[d.tier],
+        weight: d.beam ? 3.5 : 2.5, opacity: 1, fillOpacity: 0.88
+      });
+      var popup = '<div style="padding:13px 15px;min-width:220px;font-family:Segoe UI,Arial,sans-serif;">' +
+        '<div style="font-size:11px;color:#8892b0;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:3px;">Location ' + d.loc + ' &middot; NBI ' + d.nbi + '</div>' +
+        '<div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;">' + d.feat + '</div>' +
+        '<div style="font-size:12px;color:#a8b4cc;">' + d.road + ' &middot; ' + d.county + ' County &middot; Trip ' + d.trip + '</div>' +
+        '<hr style="border:none;border-top:1px solid #2e3a5c;margin:8px 0;"/>' +
+        (d.cl3 ? '<div style="font-size:12px;color:#8892b0;">CL3 (438-7004): <b style="color:#fff;">' + d.cl3 + ' LF</b></div>' : '') +
+        (d.cl7 ? '<div style="font-size:12px;color:#8892b0;">CL7 (438-7007): <b style="color:#fff;">' + d.cl7 + ' LF</b></div>' : '') +
+        '<div style="font-size:22px;font-weight:800;color:' + TIER_COLOR[d.tier] + ';margin-top:4px;">' + d.qty + ' LF total</div>' +
+        '<div style="font-size:12px;color:#8892b0;">~' + d.days + ' day(s) est. (joint crew)</div>' +
+        (d.beam ? '<div style="margin-top:6px;padding:6px 8px;background:rgba(239,68,68,0.15);border-radius:6px;font-size:11.5px;color:#fca5a5;">&#9881; Also: 3 Concrete Beam Repairs + 1 CFRP Repair — dedicated structural crew, ~11 additional days</div>' : '') +
+        '</div>';
+      m.bindPopup(popup);
+      markerLayer.addLayer(m);
+      var icon = L.divIcon({
+        className: '', html: '<div style="width:'+r*2+'px;height:'+r*2+'px;display:flex;align-items:center;justify-content:center;font-size:'+(r>13?10:9)+'px;font-weight:900;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.8);pointer-events:none;">' + d.loc + '</div>',
+        iconSize: [r*2, r*2], iconAnchor: [r, r]
+      });
+      markerLayer.addLayer(L.marker([d.lat, d.lng], {icon: icon, interactive: false, zIndexOffset: 1000}));
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active'); curTier = b.dataset.tier; render();
+    });
+  });
+  sel.addEventListener('change', function(){ curCounty = sel.value; render(); });
+
+  render();
+})();
+</script>
+</body>
+</html>

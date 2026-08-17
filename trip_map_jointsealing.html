@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>Mobilization Trip Map — CSJ 0907-00-235</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+body { margin:0; background:#1a1f2e; color:#e8eaf0; font-family:'Segoe UI',Arial,sans-serif; }
+a { color: inherit; }
+header.page-hd { background:#12172a; border-bottom:1px solid #2e3a5c; padding:16px 24px; }
+header.page-hd .kicker { font-size:11px; color:#8892b0; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4px; }
+header.page-hd h1 { margin:0; font-size:20px; color:#fff; }
+header.page-hd .sub { font-size:12px; color:#8892b0; margin-top:4px; }
+.stats-bar { display:flex; gap:0; background:#0f1424; border-bottom:1px solid #2e3a5c; flex-wrap:wrap; }
+.stat { padding:14px 22px; text-align:center; border-right:1px solid #2e3a5c; flex:1; min-width:100px; }
+.stat .n { font-size:21px; font-weight:800; color:#7eb8f7; }
+.stat .l { font-size:9.5px; color:#8892b0; margin-top:2px; text-transform:uppercase; letter-spacing:0.06em; }
+.leaflet-popup-content-wrapper { background:#12172a !important; border:1px solid #3b5bdb !important; border-radius:10px !important; box-shadow:0 4px 20px rgba(0,0,0,0.6) !important; color:#e8eaf0 !important; padding:0 !important; }
+.leaflet-popup-tip { background:#12172a !important; }
+.leaflet-popup-content { margin:0 !important; width:auto !important; }
+.leaflet-control-zoom a { background:#1e2740 !important; color:#c8d0e0 !important; border-color:#2e3a5c !important; }
+.leaflet-control-zoom a:hover { background:#263660 !important; }
+.leaflet-control-attribution { background:rgba(18,23,42,0.8) !important; color:#555 !important; }
+.leaflet-control-layers { background:#1e2740 !important; color:#e8eaf0 !important; border:1px solid #2e3a5c !important; }
+.filter-bar { display:flex; gap:6px; flex-wrap:wrap; padding:10px 24px; background:#151a2a; border-bottom:1px solid #2e3a5c; align-items:center; }
+.filter-btn { padding:4px 11px; border-radius:5px; border:1px solid #2e3a5c; background:#1e2740; color:#c8d0e0; font-size:11.5px; cursor:pointer; }
+.filter-btn.active { background:#2563eb; border-color:#3b82f6; color:#fff; }
+.filter-btn:hover { background:#263660; }
+select.county-select { padding:4px 10px; border-radius:5px; border:1px solid #2e3a5c; background:#1e2740; color:#c8d0e0; font-size:11.5px; }
+footer.page-ft { padding:14px 24px; background:#0f1424; border-top:1px solid #2e3a5c; font-size:11px; color:#5c6784; text-align:center; }
+.backlink { font-size:12px; color:#7eb8f7; text-decoration:none; }
+
+#map { width:100%; height: calc(100vh - 246px); min-height:420px; }
+.legend-bar { display:flex; gap:10px; flex-wrap:wrap; padding:10px 24px; background:#151a2a; border-bottom:1px solid #2e3a5c; }
+.legend-chip { display:flex; align-items:center; gap:6px; font-size:11.5px; color:#c8d0e0; }
+.legend-dot { width:13px; height:13px; border-radius:50%; display:inline-block; }
+</style>
+</head>
+<body>
+<header class="page-hd">
+  <div class="kicker">TxDOT San Angelo District &middot; CSJ 0907-00-235 &middot; VA &middot; "Tom Green, etc."</div>
+  <h1>Mobilization Trip Map — Joint Crew (Trips A&ndash;H)</h1>
+  <div class="sub"><a class="backlink" href="index.html">&larr; Back to project index</a> &middot; 33 locations grouped into 8 county-based mobilization trips</div>
+</header>
+<div class="stats-bar">
+  <div class="stat"><div class="n">8</div><div class="l">Trips</div></div>
+  <div class="stat"><div class="n">41</div><div class="l">Joint-Crew Days</div></div>
+  <div class="stat"><div class="n">2</div><div class="l">Priority Trips (A, G)</div></div>
+  <div class="stat"><div class="n">2</div><div class="l">Isolated Trips (C, H)</div></div>
+  <div class="stat"><div class="n">2</div><div class="l">Travel/Mob Days</div></div>
+</div>
+<div class="legend-bar" id="legendBar"></div>
+<div class="filter-bar">
+  <button class="filter-btn active" data-f="all">All Trips</button>
+  <button class="filter-btn" data-f="priority">Priority (A, G)</button>
+  <button class="filter-btn" data-f="cluster">Clusters (B, D, E, F)</button>
+  <button class="filter-btn" data-f="isolated">Isolated (C, H)</button>
+</div>
+<div id="map"></div>
+<footer class="page-ft">Trip A = home base (San Angelo). Trips E&ndash;H run as one continuous "Southern Swing" mobilization (Menard &rarr; Kimble &rarr; Sutton &rarr; Real) to minimize repeat long-distance travel.</footer>
+<script>
+var DATA = [{"loc": 1, "feat": "Rock Pen Draw", "road": "US 67", "county": "Irion", "lat": 31.22734698, "lng": -100.82860961, "qty": 368, "trip": "B", "tripName": "Irion County", "tripQty": 945, "tripDays": 6, "beam": false}, {"loc": 2, "feat": "Coon Hollow", "road": "US 67", "county": "Irion", "lat": 31.27657238, "lng": -100.81436972, "qty": 322, "trip": "B", "tripName": "Irion County", "tripQty": 945, "tripDays": 6, "beam": false}, {"loc": 3, "feat": "Lopez Creek", "road": "US 67", "county": "Irion", "lat": 31.30481531, "lng": -100.79529708, "qty": 230, "trip": "B", "tripName": "Irion County", "tripQty": 945, "tripDays": 6, "beam": false}, {"loc": 4, "feat": "Lopez Creek", "road": "RM 2469", "county": "Irion", "lat": 31.29525995, "lng": -100.88090153, "qty": 25, "trip": "B", "tripName": "Irion County", "tripQty": 945, "tripDays": 6, "beam": false}, {"loc": 5, "feat": "Little Devils River", "road": "US 290", "county": "Kimble", "lat": 30.29652723, "lng": -99.4080233, "qty": 255, "trip": "F", "tripName": "Kimble County", "tripQty": 610, "tripDays": 3, "beam": false}, {"loc": 6, "feat": "Pedernales River", "road": "US 290", "county": "Kimble", "lat": 30.30038476, "lng": -99.30833543, "qty": 210, "trip": "F", "tripName": "Kimble County", "tripQty": 610, "tripDays": 3, "beam": false}, {"loc": 7, "feat": "IH-10 crossing", "road": "FM 2291", "county": "Kimble", "lat": 30.52691558, "lng": -99.84241299, "qty": 145, "trip": "F", "tripName": "Kimble County", "tripQty": 610, "tripDays": 3, "beam": false}, {"loc": 8, "feat": "Volkmann Draw", "road": "US 190", "county": "Menard", "lat": 30.94283344, "lng": -99.77083004, "qty": 30, "trip": "E", "tripName": "Menard County", "tripQty": 176, "tripDays": 4, "beam": false}, {"loc": 9, "feat": "Chapman Draw", "road": "US 190", "county": "Menard", "lat": 30.95482062, "lng": -99.73653565, "qty": 30, "trip": "E", "tripName": "Menard County", "tripQty": 176, "tripDays": 4, "beam": false}, {"loc": 10, "feat": "Scalp Creek", "road": "US 190", "county": "Menard", "lat": 30.95482062, "lng": -99.73653565, "qty": 77, "trip": "E", "tripName": "Menard County", "tripQty": 176, "tripDays": 4, "beam": false}, {"loc": 11, "feat": "Las Moras Creek", "road": "FM 2092", "county": "Menard", "lat": 30.91682946, "lng": -99.80672871, "qty": 39, "trip": "E", "tripName": "Menard County", "tripQty": 176, "tripDays": 4, "beam": false}, {"loc": 12, "feat": "Camp Wood Creek", "road": "SH 55", "county": "Real", "lat": 29.68336768, "lng": -100.01824468, "qty": 378, "trip": "H", "tripName": "Real County", "tripQty": 462, "tripDays": 3, "beam": false}, {"loc": 13, "feat": "Ranch Creek", "road": "SH 55", "county": "Real", "lat": 29.63546713, "lng": -100.00651061, "qty": 84, "trip": "H", "tripName": "Real County", "tripQty": 462, "tripDays": 3, "beam": false}, {"loc": 14, "feat": "Big Coyote Creek Branch", "road": "FM 1677", "county": "Runnels", "lat": 32.02088789, "lng": -100.03878098, "qty": 138, "trip": "D", "tripName": "Runnels County", "tripQty": 240, "tripDays": 3, "beam": false}, {"loc": 15, "feat": "Bluff Creek", "road": "FM 1770", "county": "Runnels", "lat": 31.96636586, "lng": -99.93991068, "qty": 51, "trip": "D", "tripName": "Runnels County", "tripQty": 240, "tripDays": 3, "beam": false}, {"loc": 16, "feat": "Elm Creek", "road": "FM 1770", "county": "Runnels", "lat": 31.97959143, "lng": -99.86688577, "qty": 51, "trip": "D", "tripName": "Runnels County", "tripQty": 240, "tripDays": 3, "beam": false}, {"loc": 17, "feat": "Sterling Creek", "road": "SH 163", "county": "Sterling", "lat": 31.7470307, "lng": -101.03881427, "qty": 56, "trip": "C", "tripName": "Sterling County", "tripQty": 56, "tripDays": 1, "beam": false}, {"loc": 18, "feat": "Devils River (WB)", "road": "IH-10", "county": "Sutton", "lat": 30.63186297, "lng": -100.86539401, "qty": 798, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": false}, {"loc": 19, "feat": "Devils River (EB)", "road": "IH-10", "county": "Sutton", "lat": 30.63164658, "lng": -100.8655769, "qty": 798, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": false}, {"loc": 20, "feat": "RM 1312 (WB)", "road": "IH-10", "county": "Sutton", "lat": 30.62668983, "lng": -100.85174619, "qty": 170, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": false}, {"loc": 21, "feat": "RM 1312 (EB)", "road": "IH-10", "county": "Sutton", "lat": 30.62644856, "lng": -100.85187147, "qty": 170, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": false}, {"loc": 22, "feat": "Turkey Roost Draw (EB)", "road": "IH-10", "county": "Sutton", "lat": 30.62421938, "lng": -100.84599799, "qty": 224, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": false}, {"loc": 23, "feat": "Turkey Roost Draw (WB)", "road": "IH-10", "county": "Sutton", "lat": 30.62438184, "lng": -100.8456838, "qty": 240, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": false}, {"loc": 24, "feat": "SL 467 at IH-10 (+ Concrete Beam Repair 3EA / CFRP 1EA)", "road": "SL 467", "county": "Sutton", "lat": 30.58276624, "lng": -100.6579261, "qty": 235, "trip": "G", "tripName": "Sutton County / IH-10 Corridor", "tripQty": 2635, "tripDays": 11, "beam": true}, {"loc": 25, "feat": "North Concho River (SB Ftg Rd)", "road": "US 67 SB Ftg Rd", "county": "Tom Green", "lat": 31.46680827, "lng": -100.44891992, "qty": 204, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 26, "feat": "North Concho River (NB Ftg Rd)", "road": "US 67 NB Ftg Rd", "county": "Tom Green", "lat": 31.46619593, "lng": -100.44786909, "qty": 400, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 27, "feat": "Glenna St", "road": "US 67", "county": "Tom Green", "lat": 31.45127788, "lng": -100.4881272, "qty": 170, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 28, "feat": "Van Buren St", "road": "US 67", "county": "Tom Green", "lat": 31.45975825, "lng": -100.4626152, "qty": 108, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 29, "feat": "N Jefferson St", "road": "US 67", "county": "Tom Green", "lat": 31.4613828, "lng": -100.4585776, "qty": 179, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 30, "feat": "Howard St", "road": "US 67", "county": "Tom Green", "lat": 31.45763263, "lng": -100.4670273, "qty": 108, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 31, "feat": "N Main St", "road": "US 67", "county": "Tom Green", "lat": 31.47400801, "lng": -100.432025, "qty": 166, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 32, "feat": "N Bell St", "road": "US 67", "county": "Tom Green", "lat": 31.47542249, "lng": -100.4132184, "qty": 160, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}, {"loc": 33, "feat": "Concho River", "road": "RM 2034", "county": "Tom Green", "lat": 31.66117052, "lng": -100.74137128, "qty": 106, "trip": "A", "tripName": "Tom Green County (San Angelo Metro)", "tripQty": 1601, "tripDays": 10, "beam": false}];
+var TRIP_COLOR = {"A": "#3b82f6", "B": "#f97316", "C": "#22c55e", "D": "#eab308", "E": "#ec4899", "F": "#a855f7", "G": "#ef4444", "H": "#06b6d4"};
+var TRIP_NAME = {"A": "Tom Green County (San Angelo Metro)", "B": "Irion County", "C": "Sterling County", "D": "Runnels County", "E": "Menard County", "F": "Kimble County", "G": "Sutton County / IH-10 Corridor", "H": "Real County"};
+var PRIORITY = ["A", "G"];
+var ISOLATED = ["C", "H"];
+
+(function init() {
+  if (typeof L === 'undefined') { setTimeout(init, 100); return; }
+  var map = L.map('map').setView([30.9, -100.2], 7);
+  
+var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors', maxZoom: 19
+});
+var satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  attribution: '&copy; Esri, Maxar, Earthstar Geographics', maxZoom: 19
+});
+var topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenTopoMap', maxZoom: 17
+});
+streets.addTo(map);
+L.control.layers({'Street Map': streets, 'Satellite': satellite, 'Topographic': topo}, {}, {position:'topright'}).addTo(map);
+L.control.scale({imperial: true, metric: false}).addTo(map);
+
+
+  var legend = document.getElementById('legendBar');
+  Object.keys(TRIP_COLOR).forEach(function(t){
+    var d = document.createElement('div'); d.className='legend-chip';
+    d.innerHTML = '<span class="legend-dot" style="background:'+TRIP_COLOR[t]+';"></span>Trip '+t+' — '+TRIP_NAME[t];
+    legend.appendChild(d);
+  });
+
+  var markerLayer = L.layerGroup().addTo(map);
+  var curFilter = 'all';
+
+  function passesFilter(d) {
+    if (curFilter === 'all') return true;
+    if (curFilter === 'priority') return PRIORITY.indexOf(d.trip) > -1;
+    if (curFilter === 'isolated') return ISOLATED.indexOf(d.trip) > -1;
+    if (curFilter === 'cluster') return PRIORITY.indexOf(d.trip) === -1 && ISOLATED.indexOf(d.trip) === -1;
+    return true;
+  }
+
+  function render() {
+    markerLayer.clearLayers();
+    var filtered = DATA.filter(passesFilter);
+    filtered.forEach(function(d){
+      var r = d.beam ? 17 : 13;
+      var color = TRIP_COLOR[d.trip];
+      var m = L.circleMarker([d.lat, d.lng], {
+        radius: r, fillColor: color, color: d.beam ? '#fff' : '#12172a',
+        weight: d.beam ? 3.5 : 2, opacity: 1, fillOpacity: 0.9
+      });
+      var popup = '<div style="padding:13px 15px;min-width:220px;font-family:Segoe UI,Arial,sans-serif;">' +
+        '<div style="font-size:11px;font-weight:700;color:' + color + ';text-transform:uppercase;letter-spacing:0.07em;">Trip ' + d.trip + ' &middot; ' + d.county + ' County</div>' +
+        '<div style="font-size:15px;font-weight:700;color:#fff;margin-bottom:2px;">Location ' + d.loc + ' — ' + d.feat + '</div>' +
+        '<div style="font-size:12px;color:#a8b4cc;">' + d.road + '</div>' +
+        '<hr style="border:none;border-top:1px solid #2e3a5c;margin:8px 0;"/>' +
+        '<div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;"><span style="color:#8892b0;">Quantity</span><span style="font-weight:600;color:' + color + ';">' + d.qty + ' LF</span></div>' +
+        '<div style="display:flex;justify-content:space-between;font-size:12px;padding:2px 0;"><span style="color:#8892b0;">Trip total</span><span style="font-weight:600;">' + d.tripQty + ' LF / ' + d.tripDays + ' days</span></div>' +
+        '</div>';
+      m.bindPopup(popup);
+      markerLayer.addLayer(m);
+      var icon = L.divIcon({
+        className: '', html: '<div style="width:'+r*2+'px;height:'+r*2+'px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.8);pointer-events:none;">' + d.trip + '</div>',
+        iconSize: [r*2, r*2], iconAnchor: [r, r]
+      });
+      markerLayer.addLayer(L.marker([d.lat, d.lng], {icon: icon, interactive: false, zIndexOffset: 1000}));
+    });
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.filter-btn').forEach(function(x){x.classList.remove('active');});
+      b.classList.add('active'); curFilter = b.dataset.f; render();
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
