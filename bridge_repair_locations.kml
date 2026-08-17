@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>CSJ 0907-00-235 – Bridge Joint Cleaning/Sealing &amp; Beam Repair</name>
+    <description>San Angelo District, 33 locations across 8 counties. Color tiers by combined joint length (CL3+CL7 LF). Production rate assumption: 300 LF/day.</description>
+<Style id="orange">
+  <IconStyle>
+    <color>ff1472f5</color>
+    <scale>1.0</scale>
+    <Icon><href>http://maps.google.com/mapfiles/kml/paddle/orange-circle.png</href></Icon>
+    <hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+  </IconStyle>
+  <LabelStyle><scale>0.75</scale></LabelStyle>
+</Style>
+<Style id="yellow">
+  <IconStyle>
+    <color>ff00d7f0</color>
+    <scale>1.0</scale>
+    <Icon><href>http://maps.google.com/mapfiles/kml/paddle/ylw-circle.png</href></Icon>
+    <hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+  </IconStyle>
+  <LabelStyle><scale>0.75</scale></LabelStyle>
+</Style>
+<Style id="blue">
+  <IconStyle>
+    <color>ffed6d2c</color>
+    <scale>1.0</scale>
+    <Icon><href>http://maps.google.com/mapfiles/kml/paddle/blu-circle.png</href></Icon>
+    <hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+  </IconStyle>
+  <LabelStyle><scale>0.75</scale></LabelStyle>
+</Style>
+<Style id="purple">
+  <IconStyle>
+    <color>ffcd4eaa</color>
+    <scale>1.0</scale>
+    <Icon><href>http://maps.google.com/mapfiles/kml/paddle/purple-circle.png</href></Icon>
+    <hotSpot x="0.5" y="0" xunits="fraction" yunits="fraction"/>
+  </IconStyle>
+  <LabelStyle><scale>0.75</scale></LabelStyle>
+</Style>
+<Folder>
+  <name>Orange – ≤ 50 LF</name>
+  <Placemark>
+    <name>Loc 4 – RM 2469 / Lopez Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 4<br/>
+      <b>NBI:</b> 07-119-0-2468-01-001<br/>
+      <b>County:</b> Irion<br/>
+      <b>Roadway:</b> RM 2469<br/>
+      <b>Feature Crossed:</b> Lopez Creek<br/>
+      <b>Trip:</b> B<br/>
+      <b>CL3:</b> 25 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 25 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#orange</styleUrl>
+    <Point><coordinates>-100.88090153,31.29525995,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 8 – US 190 / Volkmann Draw</name>
+    <description><![CDATA[
+      <b>Location:</b> 8<br/>
+      <b>NBI:</b> 07-164-0-0825-01-005<br/>
+      <b>County:</b> Menard<br/>
+      <b>Roadway:</b> US 190<br/>
+      <b>Feature Crossed:</b> Volkmann Draw<br/>
+      <b>Trip:</b> E<br/>
+      <b>CL3:</b> 30 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 30 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#orange</styleUrl>
+    <Point><coordinates>-99.77083004,30.94283344,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 9 – US 190 / Chapman Draw</name>
+    <description><![CDATA[
+      <b>Location:</b> 9<br/>
+      <b>NBI:</b> 07-164-0-0825-01-007<br/>
+      <b>County:</b> Menard<br/>
+      <b>Roadway:</b> US 190<br/>
+      <b>Feature Crossed:</b> Chapman Draw<br/>
+      <b>Trip:</b> E<br/>
+      <b>CL3:</b> 30 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 30 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#orange</styleUrl>
+    <Point><coordinates>-99.73653565,30.95482062,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 11 – FM 2092 / Las Moras Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 11<br/>
+      <b>NBI:</b> 07-164-0-2008-01-002<br/>
+      <b>County:</b> Menard<br/>
+      <b>Roadway:</b> FM 2092<br/>
+      <b>Feature Crossed:</b> Las Moras Creek<br/>
+      <b>Trip:</b> E<br/>
+      <b>CL3:</b> 39 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 39 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#orange</styleUrl>
+    <Point><coordinates>-99.80672871,30.91682946,0</coordinates></Point>
+  </Placemark>
+</Folder>
+<Folder>
+  <name>Yellow – 51–150 LF</name>
+  <Placemark>
+    <name>Loc 7 – FM 2291 / IH-10 crossing</name>
+    <description><![CDATA[
+      <b>Location:</b> 7<br/>
+      <b>NBI:</b> 07-134-0-0141-09-134<br/>
+      <b>County:</b> Kimble<br/>
+      <b>Roadway:</b> FM 2291<br/>
+      <b>Feature Crossed:</b> IH-10 crossing<br/>
+      <b>Trip:</b> F<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 145 LF<br/>
+      <b>Total:</b> 145 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-99.84241299,30.52691558,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 10 – US 190 / Scalp Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 10<br/>
+      <b>NBI:</b> 07-164-0-0825-01-009<br/>
+      <b>County:</b> Menard<br/>
+      <b>Roadway:</b> US 190<br/>
+      <b>Feature Crossed:</b> Scalp Creek<br/>
+      <b>Trip:</b> E<br/>
+      <b>CL3:</b> 77 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 77 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-99.73653565,30.95482062,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 13 – SH 55 / Ranch Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 13<br/>
+      <b>NBI:</b> 07-193-0-0235-03-023<br/>
+      <b>County:</b> Real<br/>
+      <b>Roadway:</b> SH 55<br/>
+      <b>Feature Crossed:</b> Ranch Creek<br/>
+      <b>Trip:</b> H<br/>
+      <b>CL3:</b> 84 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 84 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-100.00651061,29.63546713,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 14 – FM 1677 / Big Coyote Creek Branch</name>
+    <description><![CDATA[
+      <b>Location:</b> 14<br/>
+      <b>NBI:</b> 07-200-0-1646-01-001<br/>
+      <b>County:</b> Runnels<br/>
+      <b>Roadway:</b> FM 1677<br/>
+      <b>Feature Crossed:</b> Big Coyote Creek Branch<br/>
+      <b>Trip:</b> D<br/>
+      <b>CL3:</b> 138 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 138 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-100.03878098,32.02088789,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 15 – FM 1770 / Bluff Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 15<br/>
+      <b>NBI:</b> 07-200-0-1731-01-001<br/>
+      <b>County:</b> Runnels<br/>
+      <b>Roadway:</b> FM 1770<br/>
+      <b>Feature Crossed:</b> Bluff Creek<br/>
+      <b>Trip:</b> D<br/>
+      <b>CL3:</b> 51 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 51 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-99.93991068,31.96636586,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 16 – FM 1770 / Elm Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 16<br/>
+      <b>NBI:</b> 07-200-0-1731-01-003<br/>
+      <b>County:</b> Runnels<br/>
+      <b>Roadway:</b> FM 1770<br/>
+      <b>Feature Crossed:</b> Elm Creek<br/>
+      <b>Trip:</b> D<br/>
+      <b>CL3:</b> 51 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 51 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-99.86688577,31.97959143,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 17 – SH 163 / Sterling Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 17<br/>
+      <b>NBI:</b> 07-216-0-1648-01-003<br/>
+      <b>County:</b> Sterling<br/>
+      <b>Roadway:</b> SH 163<br/>
+      <b>Feature Crossed:</b> Sterling Creek<br/>
+      <b>Trip:</b> C<br/>
+      <b>CL3:</b> 56 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 56 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-101.03881427,31.7470307,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 28 – US 67 / Van Buren St</name>
+    <description><![CDATA[
+      <b>Location:</b> 28<br/>
+      <b>NBI:</b> 07-226-0-0077-06-090<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> Van Buren St<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 108 LF<br/>
+      <b>Total:</b> 108 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-100.4626152,31.45975825,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 30 – US 67 / Howard St</name>
+    <description><![CDATA[
+      <b>Location:</b> 30<br/>
+      <b>NBI:</b> 07-226-0-0077-06-092<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> Howard St<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 108 LF<br/>
+      <b>Total:</b> 108 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-100.4670273,31.45763263,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 33 – RM 2034 / Concho River</name>
+    <description><![CDATA[
+      <b>Location:</b> 33<br/>
+      <b>NBI:</b> 07-226-0-2010-04-011<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> RM 2034<br/>
+      <b>Feature Crossed:</b> Concho River<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 106 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 106 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#yellow</styleUrl>
+    <Point><coordinates>-100.74137128,31.66117052,0</coordinates></Point>
+  </Placemark>
+</Folder>
+<Folder>
+  <name>Blue – 151–400 LF</name>
+  <Placemark>
+    <name>Loc 1 – US 67 / Rock Pen Draw</name>
+    <description><![CDATA[
+      <b>Location:</b> 1<br/>
+      <b>NBI:</b> 07-119-0-0077-04-041<br/>
+      <b>County:</b> Irion<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> Rock Pen Draw<br/>
+      <b>Trip:</b> B<br/>
+      <b>CL3:</b> 368 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 368 LF<br/>
+      <b>Est. Days (joint crew):</b> ~2 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.82860961,31.22734698,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 2 – US 67 / Coon Hollow</name>
+    <description><![CDATA[
+      <b>Location:</b> 2<br/>
+      <b>NBI:</b> 07-119-0-0077-05-006<br/>
+      <b>County:</b> Irion<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> Coon Hollow<br/>
+      <b>Trip:</b> B<br/>
+      <b>CL3:</b> 322 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 322 LF<br/>
+      <b>Est. Days (joint crew):</b> ~2 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.81436972,31.27657238,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 3 – US 67 / Lopez Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 3<br/>
+      <b>NBI:</b> 07-119-0-0077-05-009<br/>
+      <b>County:</b> Irion<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> Lopez Creek<br/>
+      <b>Trip:</b> B<br/>
+      <b>CL3:</b> 230 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 230 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.79529708,31.30481531,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 5 – US 290 / Little Devils River</name>
+    <description><![CDATA[
+      <b>Location:</b> 5<br/>
+      <b>NBI:</b> 07-134-0-0112-01-020<br/>
+      <b>County:</b> Kimble<br/>
+      <b>Roadway:</b> US 290<br/>
+      <b>Feature Crossed:</b> Little Devils River<br/>
+      <b>Trip:</b> F<br/>
+      <b>CL3:</b> 255 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 255 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-99.4080233,30.29652723,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 6 – US 290 / Pedernales River</name>
+    <description><![CDATA[
+      <b>Location:</b> 6<br/>
+      <b>NBI:</b> 07-134-0-0112-01-022<br/>
+      <b>County:</b> Kimble<br/>
+      <b>Roadway:</b> US 290<br/>
+      <b>Feature Crossed:</b> Pedernales River<br/>
+      <b>Trip:</b> F<br/>
+      <b>CL3:</b> 210 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 210 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-99.30833543,30.30038476,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 12 – SH 55 / Camp Wood Creek</name>
+    <description><![CDATA[
+      <b>Location:</b> 12<br/>
+      <b>NBI:</b> 07-193-0-0235-03-017<br/>
+      <b>County:</b> Real<br/>
+      <b>Roadway:</b> SH 55<br/>
+      <b>Feature Crossed:</b> Camp Wood Creek<br/>
+      <b>Trip:</b> H<br/>
+      <b>CL3:</b> 378 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 378 LF<br/>
+      <b>Est. Days (joint crew):</b> ~2 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.01824468,29.68336768,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 20 – IH-10 / RM 1312 (WB)</name>
+    <description><![CDATA[
+      <b>Location:</b> 20<br/>
+      <b>NBI:</b> 07-218-0-0141-02-070<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> IH-10<br/>
+      <b>Feature Crossed:</b> RM 1312 (WB)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 170 LF<br/>
+      <b>Total:</b> 170 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.85174619,30.62668983,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 21 – IH-10 / RM 1312 (EB)</name>
+    <description><![CDATA[
+      <b>Location:</b> 21<br/>
+      <b>NBI:</b> 07-218-0-0141-02-071<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> IH-10<br/>
+      <b>Feature Crossed:</b> RM 1312 (EB)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 170 LF<br/>
+      <b>Total:</b> 170 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.85187147,30.62644856,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 22 – IH-10 / Turkey Roost Draw (EB)</name>
+    <description><![CDATA[
+      <b>Location:</b> 22<br/>
+      <b>NBI:</b> 07-218-0-0141-02-072<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> IH-10<br/>
+      <b>Feature Crossed:</b> Turkey Roost Draw (EB)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 224 LF<br/>
+      <b>Total:</b> 224 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.84599799,30.62421938,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 23 – IH-10 / Turkey Roost Draw (WB)</name>
+    <description><![CDATA[
+      <b>Location:</b> 23<br/>
+      <b>NBI:</b> 07-218-0-0141-02-073<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> IH-10<br/>
+      <b>Feature Crossed:</b> Turkey Roost Draw (WB)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 240 LF<br/>
+      <b>Total:</b> 240 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.8456838,30.62438184,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 24 – SL 467 / SL 467 at IH-10 (+ Concrete Beam Repair 3EA / CFRP 1EA)</name>
+    <description><![CDATA[
+      <b>Location:</b> 24<br/>
+      <b>NBI:</b> 07-218-0-0141-03-086<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> SL 467<br/>
+      <b>Feature Crossed:</b> SL 467 at IH-10 (+ Concrete Beam Repair 3EA / CFRP 1EA)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 235 LF<br/>
+      <b>Total:</b> 235 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)<br/><b>Also:</b> Concrete Beam Repair x3 + CFRP x1 (dedicated structural crew, ~11 days)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.6579261,30.58276624,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 25 – US 67 SB Ftg Rd / North Concho River (SB Ftg Rd)</name>
+    <description><![CDATA[
+      <b>Location:</b> 25<br/>
+      <b>NBI:</b> 07-226-0-0077-06-071<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67 SB Ftg Rd<br/>
+      <b>Feature Crossed:</b> North Concho River (SB Ftg Rd)<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 204 LF<br/>
+      <b>Total:</b> 204 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.44891992,31.46680827,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 26 – US 67 NB Ftg Rd / North Concho River (NB Ftg Rd)</name>
+    <description><![CDATA[
+      <b>Location:</b> 26<br/>
+      <b>NBI:</b> 07-226-0-0077-06-072<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67 NB Ftg Rd<br/>
+      <b>Feature Crossed:</b> North Concho River (NB Ftg Rd)<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 400 LF &nbsp; <b>CL7:</b> 0 LF<br/>
+      <b>Total:</b> 400 LF<br/>
+      <b>Est. Days (joint crew):</b> ~2 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.44786909,31.46619593,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 27 – US 67 / Glenna St</name>
+    <description><![CDATA[
+      <b>Location:</b> 27<br/>
+      <b>NBI:</b> 07-226-0-0077-06-087<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> Glenna St<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 170 LF<br/>
+      <b>Total:</b> 170 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.4881272,31.45127788,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 29 – US 67 / N Jefferson St</name>
+    <description><![CDATA[
+      <b>Location:</b> 29<br/>
+      <b>NBI:</b> 07-226-0-0077-06-091<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> N Jefferson St<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 179 LF<br/>
+      <b>Total:</b> 179 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.4585776,31.4613828,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 31 – US 67 / N Main St</name>
+    <description><![CDATA[
+      <b>Location:</b> 31<br/>
+      <b>NBI:</b> 07-226-0-0158-02-060<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> N Main St<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 166 LF<br/>
+      <b>Total:</b> 166 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.432025,31.47400801,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 32 – US 67 / N Bell St</name>
+    <description><![CDATA[
+      <b>Location:</b> 32<br/>
+      <b>NBI:</b> 07-226-0-0158-02-063<br/>
+      <b>County:</b> Tom Green<br/>
+      <b>Roadway:</b> US 67<br/>
+      <b>Feature Crossed:</b> N Bell St<br/>
+      <b>Trip:</b> A<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 160 LF<br/>
+      <b>Total:</b> 160 LF<br/>
+      <b>Est. Days (joint crew):</b> ~1 day(s)
+    ]]></description>
+    <styleUrl>#blue</styleUrl>
+    <Point><coordinates>-100.4132184,31.47542249,0</coordinates></Point>
+  </Placemark>
+</Folder>
+<Folder>
+  <name>Purple – 400+ LF</name>
+  <Placemark>
+    <name>Loc 18 – IH-10 / Devils River (WB)</name>
+    <description><![CDATA[
+      <b>Location:</b> 18<br/>
+      <b>NBI:</b> 07-218-0-0141-02-068<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> IH-10<br/>
+      <b>Feature Crossed:</b> Devils River (WB)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 798 LF<br/>
+      <b>Total:</b> 798 LF<br/>
+      <b>Est. Days (joint crew):</b> ~3 day(s)
+    ]]></description>
+    <styleUrl>#purple</styleUrl>
+    <Point><coordinates>-100.86539401,30.63186297,0</coordinates></Point>
+  </Placemark>
+  <Placemark>
+    <name>Loc 19 – IH-10 / Devils River (EB)</name>
+    <description><![CDATA[
+      <b>Location:</b> 19<br/>
+      <b>NBI:</b> 07-218-0-0141-02-069<br/>
+      <b>County:</b> Sutton<br/>
+      <b>Roadway:</b> IH-10<br/>
+      <b>Feature Crossed:</b> Devils River (EB)<br/>
+      <b>Trip:</b> G<br/>
+      <b>CL3:</b> 0 LF &nbsp; <b>CL7:</b> 798 LF<br/>
+      <b>Total:</b> 798 LF<br/>
+      <b>Est. Days (joint crew):</b> ~3 day(s)
+    ]]></description>
+    <styleUrl>#purple</styleUrl>
+    <Point><coordinates>-100.8655769,30.63164658,0</coordinates></Point>
+  </Placemark>
+</Folder>
+  </Document>
+</kml>
